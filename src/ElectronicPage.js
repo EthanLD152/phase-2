@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function ElectronicPage() {
   const [products, setProduct] = useState([])
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=10")
@@ -9,6 +10,10 @@ function ElectronicPage() {
       .then(data => setProduct(data.products))
       .catch(error => console.error(error))
   }, []);
+
+   const showProducts = products.filter((product) => {
+    return product.title.toLowerCase().includes(search.toLowerCase())
+  })
 
   return(
     <>
